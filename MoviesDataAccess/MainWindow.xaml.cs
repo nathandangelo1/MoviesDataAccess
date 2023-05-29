@@ -13,7 +13,7 @@ namespace MoviesDataAccess
         }
 
         private void UpdateListBinding()
-        {
+        {// UPDATES MOVIESFOUNDLISTBOX WITH SEARCH RESULTS
             resultsCountLabel.Content = "Number of Search Results: " + movies.Count.ToString();
             
             moviesFoundListbox.ItemsSource = movies;
@@ -24,9 +24,8 @@ namespace MoviesDataAccess
             SearchBy field;
             resultsCountLabel.Content = "";
 
-            if (YearRadioButton.IsChecked == true) { field = SearchBy.year; }
-            else if (GenreRadioButton.IsChecked == true) { field = SearchBy.genre; }
-            else { field = SearchBy.title; }
+            // IF '<SELECTION>RADIOBUTTON' IS CHECKED, FIELD EQUALS <SELECTION>, ELSE SEACHBY TITLE
+            field = (YearRadioButton.IsChecked == true) ? SearchBy.year : (GenreRadioButton.IsChecked == true) ? SearchBy.genre : SearchBy.title;
 
             DataAccess db = new DataAccess();
 

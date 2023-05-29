@@ -10,7 +10,7 @@ namespace MoviesDataAccess
     public static class Helper
     {
         public static string CnnVal(string name)
-        {
+        {// GETS REQUESTED CONNECTION STRING ([movies]) FROM APP.CONFIG FILE
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
 
         }
