@@ -9,17 +9,30 @@
         Title="MainWindow" Height="450" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="219*"/>
-            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="moviesFoundListbox" HorizontalAlignment="Left" Height="240" Margin="24,165,0,0" VerticalAlignment="Top" Width="215" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListBox x:Name="moviesFoundListbox" HorizontalAlignment="Left" Height="240" Margin="24,165,0,0" VerticalAlignment="Top" Width="375" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2">
             <ListBox.ItemsSource>
                 <SqlClient:SqlConnectionStringBuilder/>
             </ListBox.ItemsSource>
         </ListBox>
-        <TextBox x:Name="SearchTextbox" HorizontalAlignment="Left" Margin="64,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178" FontSize="16"/>
-        <Label x:Name="SearchLbl" Content="Movie Search" HorizontalAlignment="Left" Margin="61,55,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Button x:Name="SearchBtn" Content="Search" HorizontalAlignment="Left" Margin="81,127,0,0" VerticalAlignment="Top" Width="97" FontSize="16" Click="SearchBtn_Click"/>
+        <Label x:Name="SearchLbl" Content="Movie Search" HorizontalAlignment="Left" Margin="28,32,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Height="31" Width="129"/>
+        <Grid Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="28" Margin="29,74,0,0" VerticalAlignment="Top" Width="340">
+            <TextBox x:Name="SearchTextbox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="201" FontSize="16" Height="28"/>
+            <Button x:Name="SearchBtn" Content="Search" HorizontalAlignment="Left" Margin="243,0,0,0" VerticalAlignment="Center" Width="97" FontSize="16" Click="SearchBtn_Click" Height="24"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="26" Margin="24,108,0,0" VerticalAlignment="Top" Width="249">
+
+            <RadioButton x:Name="TitleRadioButton" GroupName="searchBy" Content="Title" IsChecked="True" HorizontalAlignment="Left" Margin="76,0,0,0" VerticalAlignment="Center"/>
+            <RadioButton x:Name="YearRadioButton" GroupName="searchBy" Content="Year" HorizontalAlignment="Left" Margin="208,0,0,0" VerticalAlignment="Center"/>
+            <RadioButton x:Name="GenreRadioButton" GroupName="searchBy" Content="Genre" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="140,0,0,0"/>
+            <Label Content="Search by: " HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+        </Grid>
+        <Label x:Name="resultsCountLabel" Content="" HorizontalAlignment="Left" Margin="26,139,0,0" VerticalAlignment="Top"/>
+
 
     </Grid>
 </Window>

@@ -11,12 +11,38 @@ namespace MoviesDataAccess
 {
     public class DataAccess
     {
-        public List<Movie> GetMovies(string movieSearch)
+        public List<Movie> GetMovies(string movieSearch, SearchBy field)
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("movies")))
             {
-                var output = connection.Query<Movie>($"SELECT * FROM [movies].[dbo].[tblMovies] WHERE title like '%{movieSearch}%';").ToList();
-                return output;
+                switch (field)
+                {
+
+                    //case SearchBy.year:
+                    //    return connection.Query<Movie>("Movies_GetByYear @year", new { year = movieSearch }).ToList();
+
+                    //case SearchBy.genre:
+                    //    return connection.Query<Movie>("Movies_GetByGenre @genre", new { genre = movieSearch }).ToList();
+
+                    //case SearchBy.title:
+                    //    return connection.Query<Movie>("Movies_GetByTitle @title", new { title = movieSearch }).ToList();
+
+                    //default:
+                    //    return connection.Query<Movie>("Movies_GetByTitle @title", new { title = movieSearch }).ToList();
+                    case SearchBy.year:
+                        return connection.Query<Movie>("SELECT * FROM dbo.tblMovies WHERE year LIKE @year", new { year = movieSearch }).ToList();
+
+                    case SearchBy.genre:
+                        return connection.Query<Movie>("SELECT * FROM dbo.tblMovies WHERE genres LIKE '%' + @genre + '%'", new { genre = movieSearch }).ToList();
+
+                    //case SearchBy.title:
+                    //    return connection.Query<Movie>("SELECT * FROM movies WHERE title LIKE @title", new { title = movieSearch }).ToList();
+
+                    default:
+                        return connection.Query<Movie>("SELECT * FROM dbo.tblMovies WHERE title LIKE '%' + @title + '%' ", new { title = movieSearch }).ToList();
+
+                }
+
             }
         }
     }
