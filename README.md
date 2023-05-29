@@ -1,3 +1,4 @@
 # MoviesDataAccess
-# uses db called movies
-# table tblMovies
+ dependency: Dapper microORM nuget package
+ accesses db called movies
+ and table tblMovies
