@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:MoviesDataAccess"
         xmlns:SqlClient="clr-namespace:Microsoft.Data.SqlClient;assembly=Microsoft.Data.SqlClient" x:Class="MoviesDataAccess.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="600">
+        Title="Movie Search" Height="Auto" Width="600" MinHeight="500" MinWidth="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="moviesFoundListbox" HorizontalAlignment="Left" Height="240" Margin="24,165,0,0" VerticalAlignment="Top" Width="375" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2">
+        <ListBox x:Name="moviesFoundListbox" HorizontalAlignment="Left" MinHeight="240" Height="Auto" Margin="24,165,0,24" VerticalAlignment="Top" Width="500" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2">
             <ListBox.ItemsSource>
                 <SqlClient:SqlConnectionStringBuilder/>
             </ListBox.ItemsSource>

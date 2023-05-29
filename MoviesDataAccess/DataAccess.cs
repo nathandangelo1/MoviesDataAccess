@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Dapper;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
 using Microsoft.Data.SqlClient;
 
 namespace MoviesDataAccess
@@ -15,7 +12,7 @@ namespace MoviesDataAccess
         public List<Movie> GetMovies(string movieSearch, SearchBy field)
         {
             // GETS CONNECTION STRING FOR MOVIES DB FROM HELPER CLASS
-            using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("movies")))
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("movies")))
             {
                 switch (field)
                 {
@@ -34,8 +31,9 @@ namespace MoviesDataAccess
 
                     //CASES USING STRAIGHT SQL:
                     // USES DAPPER MICRO-ORM TO MAP RECORDS TO 'MOVIE' CLASS
+
                     case SearchBy.year:
-                        return connection.Query<Movie>("SELECT * FROM dbo.tblMovies WHERE year LIKE @year", new { year = movieSearch }).ToList();
+                        return connection.Query<Movie>("SELECT * FROM dbo.tblMovies WHERE year LIKE '%'+ @year + '%'", new { year = movieSearch }).ToList();
 
                     case SearchBy.genre:
                         return connection.Query<Movie>("SELECT * FROM dbo.tblMovies WHERE genres LIKE '%' + @genre + '%'", new { genre = movieSearch }).ToList();
