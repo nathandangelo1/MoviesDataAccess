@@ -24,7 +24,7 @@ namespace MoviesDataAccess
             SearchBy field;
             resultsCountLabel.Content = "";
 
-            // IF '<SELECTION>RADIOBUTTON' IS CHECKED, FIELD EQUALS <SELECTION>, ELSE SEACHBY TITLE
+            // IF '<SELECTION>RADIOBUTTON' IS CHECKED, FIELD EQUALS <SELECTION>, ELSE SEARCHBY TITLE
             field = (YearRadioButton.IsChecked == true) ? SearchBy.year : (GenreRadioButton.IsChecked == true) ? SearchBy.genre : SearchBy.title;
 
             DataAccess db = new DataAccess();
