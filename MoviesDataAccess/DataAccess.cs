@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MoviesDataAccess
 {
@@ -15,7 +11,7 @@ namespace MoviesDataAccess
         public List<Movie> GetMovies(string movieSearch, SearchBy field)
         {
             // GETS CONNECTION STRING FOR MOVIES DB FROM HELPER CLASS
-            using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("movies")))
+            using (var connection = new SqlConnection(Helper.CnnVal("movies")))
             {
                 switch (field)
                 {
@@ -42,9 +38,7 @@ namespace MoviesDataAccess
 
                     default:
                         return connection.Query<Movie>("SELECT * FROM dbo.tblMovies WHERE title LIKE '%' + @title + '%' ", new { title = movieSearch }).ToList();
-
                 }
-
             }
         }
 
@@ -53,7 +47,7 @@ namespace MoviesDataAccess
             int movieIdInt=0, yearInt=0;
             if(!int.TryParse(year, out yearInt) && !int.TryParse(movieId, out movieIdInt)) { return false; }
 
-            using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("movies")))
+            using (var connection = new SqlConnection(Helper.CnnVal("movies")))
             {
                 List<Movie> movies = new();
                 
