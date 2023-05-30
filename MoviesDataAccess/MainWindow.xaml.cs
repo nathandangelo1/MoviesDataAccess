@@ -32,5 +32,18 @@ namespace MoviesDataAccess
             movies = db.GetMovies(SearchTextbox.Text, field);
             UpdateListBinding();
         }
+
+        private void addMovieButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataAccess db = new();
+            bool success = db.InsertMovie(movieIdTextbox.Text, titleTextbox.Text, yearTextBox.Text, genreTextbox.Text);
+
+            addMovieLabel.Content = (success) ? "Movie successfully added to Database." : "Add movie failed.";
+
+            movieIdTextbox.Text = "";
+            titleTextbox.Text = "";
+            yearTextBox.Text = "";
+            genreTextbox.Text = "";
+        }
     }
 }

@@ -47,5 +47,22 @@ namespace MoviesDataAccess
 
             }
         }
+
+        public bool InsertMovie(string movieId, string title, string year, string genre)
+        {
+            int movieIdInt=0, yearInt=0;
+            if(!int.TryParse(year, out yearInt) && !int.TryParse(movieId, out movieIdInt)) { return false; }
+
+            using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("movies")))
+            {
+                List<Movie> movies = new();
+                
+                movies.Add(new() { movieId = movieIdInt, title = title, year = yearInt, genres = genre });
+
+                connection.Execute("dbo.tblMovies_Insert @movieId, @title, @year, @genres", movies);
+
+                return true;
+            }
+        }
     }
 }
